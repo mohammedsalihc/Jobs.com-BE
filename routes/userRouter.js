@@ -13,7 +13,7 @@ const jobDate = now.format("DD-MM-YYYY");
 function verifyToken(req, res, next) {
     const token = req.cookies.token;
     if (!token) {
-        return res.status(401).json({ message: 'Unauthorized' });
+        return res.status(401).json({ message: 'token Unauthorized' });
     }
     jwt.verify(token, process.env.SECRET, (err, decoded) => {
         if (err) {
@@ -70,7 +70,6 @@ router.get('/profile', verifyToken, async (req, res) => {
     try {
         res.status(200).json(req.user);
     } catch (err) {
-        console.error(err);
         res.status(401).json({ message: 'Unauthorized' });
     }
 });
